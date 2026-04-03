@@ -1,87 +1,123 @@
-import { useContext, } from 'react'
+import React, { useContext } from 'react';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { productsContext } from '../../context/context';
-import * as React from 'react';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
-import Button from '@mui/material/Button';
-
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const Products = () => {
-  const { allProducts, loading } = useContext(productsContext)
-  const [open, setOpen] = React.useState(true);
-  const navigate = useNavigate()
+  const { allProducts, loading } = useContext(productsContext);
+  const navigate = useNavigate();
 
+  const handlenavigate = (id) => {
+    navigate(`/cart/${id}`);
+  };
 
-  function handlenavigate(id) {
-    console.log("navigated")
-    navigate(`/cart/${id}`)
-  }
   const responsive = {
     desktop: {
-      breakpoint: { max: 3000, min: 1024 },
+      breakpoint: { max: 3000, min: 1280 },
       items: 4,
-      slidesToSlide: 4 // optional, default to 1.
+      slidesToSlide: 1
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
+      breakpoint: { max: 1280, min: 768 },
       items: 2,
-      slidesToSlide: 2 // optional, default to 1.
+      slidesToSlide: 1
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
+      breakpoint: { max: 768, min: 0 },
       items: 1,
-      slidesToSlide: 1 // optional, default to 1.
+      slidesToSlide: 1
     }
   };
 
   if (loading) {
     return (
-      <div className='h-screen flex justify-center items-center'>
-
-        {/* <Button onClick={handleOpen}>Show backdrop</Button> */}
-        <Backdrop
-          sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
-          open={open}
-        // onClick={handleClose}
+      <div className="h-screen w-full bg-slate-950 flex flex-col justify-center items-center gap-6">
+        <motion.div 
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          className="w-16 h-16 border-4 border-amber-500/20 border-t-amber-500 rounded-full"
+        />
+        <motion.p 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0, 1, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="text-amber-500 font-mono tracking-[0.3em] uppercase text-sm"
         >
-          <CircularProgress color="inherit" />
-          <p className='text-4xl font-bold '>LOADING PRODUCTS.....</p>
-        </Backdrop>
+          Fetching Inventory...
+        </motion.p>
       </div>
-    )
+    );
   }
+
   return (
-    <Carousel
-      swipeable={false}
-      draggable={false}
-      showDots={true}
-      responsive={responsive}
-      infinite={true}
-      autoPlaySpeed={1000}
-      className='mt-20 px-5 '
-    >
-      {/* <div className='mt-40 grid grid-cols-4 justify-center items-center p-5 overflow-hidden w-full'> */}
-      {allProducts.map((product) => (
-        <div key={product.id} className='font-display shadow-md hover:shadow-lg cursor-pointer w-[350px]  mb-5 flex flex-col justify-center items-center h-[450px] relative '>
-          <div className='h-44'>
-            <img className='h-full' src={product.thumbnail} alt="" />
-            <p className='bg-amber-950 absolute top-2.5 left-2.5 rounded-2xl p-1.5 text-white'>{product.brand}</p>
-          </div>
-          <div className='p-5 flex flex-col justify-center space-y-2.5'>
-            <h1 className='text-3xl line-clamp-2 font-medium '>{product.title}</h1>
-            <p className='line-clamp-2 font-light text-size'>{product.description}</p>
-            <p className='text-2xl'>${product.price}</p>
-            <button onClick={() => handlenavigate(product?.id)} className='bg-amber-950 cursor-pointer text-center px-7 py-2.5 text-white rounded-2xl hover:scale-105 transition'>Show Detailes</button>
+    <div className="py-20 bg-slate-50">
+      <div className="max-w-[1400px] mx-auto px-6">
+        <div className="mb-12 flex justify-between items-end">
+          <div>
+            <h2 className="text-4xl font-black text-slate-900 italic uppercase">Featured</h2>
+            <p className="text-slate-500 font-medium">Explore our latest drops</p>
           </div>
         </div>
-      ))}
-      {/* </div> */}
-    </Carousel>
 
-  )
-}
+        <Carousel
+          swipeable={true}
+          draggable={true}
+          showDots={false}
+          responsive={responsive}
+          infinite={true}
+          autoPlay={true}
+          autoPlaySpeed={3000}
+          keyBoardControl={true}
+          customTransition="transform 500ms ease-in-out"
+          transitionDuration={500}
+          containerClass="carousel-container"
+          itemClass="px-3 pb-10" 
+        >
+          {allProducts.map((product) => (
+            <motion.div 
+              key={product.id} 
+              whileHover={{ y: -10 }}
+              className="bg-white group rounded-[2rem] border border-slate-100 overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 h-full flex flex-col"
+            >
+              <div className="relative h-64 overflow-hidden bg-slate-100">
+                <img 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                  src={product.thumbnail} 
+                  alt={product.title} 
+                />
+                <span className="absolute top-4 left-4 bg-slate-950/80 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+                  {product.brand}
+                </span>
+              </div>
 
-export default Products
+              <div className="p-6 flex flex-col flex-1">
+                <h3 className="text-xl font-bold text-slate-900 mb-2 line-clamp-1">
+                  {product.title}
+                </h3>
+                <p className="text-slate-500 text-sm line-clamp-2 mb-4 flex-1">
+                  {product.description}
+                </p>
+                
+                <div className="flex items-center justify-between mt-auto">
+                  <span className="text-2xl font-black text-slate-900 italic">
+                    ${product.price}
+                  </span>
+                  <button 
+                    onClick={() => handlenavigate(product?.id)} 
+                    className="bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-[10px] uppercase tracking-widest px-6 py-3 rounded-xl transition-all shadow-lg shadow-amber-500/20"
+                  >
+                    Details
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </Carousel>
+      </div>
+    </div>
+  );
+};
+
+export default Products;

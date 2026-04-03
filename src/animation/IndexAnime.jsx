@@ -14,9 +14,9 @@ const IndexAnime = ({ i, title, description, link, color, targetscale, progress,
             <motion.div style={{ backgroundColor: color, }} className='  relative'>
 
                 <motion.div style={{ imgscale }} className=' w-full h-full '>
-                    {/* <img className='h-full w-full' src={link} alt="" /> */}
+                    
                     <video src={link} loop autoPlay></video>
-                    {/* <img src="../public/five.webp" alt="" /> */}
+               
                 </motion.div>
             </motion.div>
         </div>
