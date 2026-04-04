@@ -2,7 +2,6 @@ import React from 'react'
 import { Outlet, Route, Routes } from 'react-router-dom'
 import Index from './layout'
 import Home from './pages/home/Home'
-
 import Products from './pages/product/Products'
 import SingleProduct from './pages/product/SingleProduct'
 import Cart from './pages/product/Cart'
