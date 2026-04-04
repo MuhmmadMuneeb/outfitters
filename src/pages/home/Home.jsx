@@ -1,6 +1,6 @@
 import React from 'react'
-import Base from '../../animation/Base'
 import Disclamer from './Disclamer'
+import Base from '../../animation/Base'
 
 const Home = () => {
     return (
