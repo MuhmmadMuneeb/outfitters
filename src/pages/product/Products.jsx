@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { productsContext } from '../../context/context';
+import { productsContext } from '../../context/Context.jsx';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 

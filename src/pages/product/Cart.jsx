@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { productsContext } from '../../context/context';
+import { productsContext } from '../../context/Context.jsx';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Cart = () => {
