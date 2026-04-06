@@ -18,10 +18,9 @@ const Nav = () => {
   return (
     <section className="fixed left-0 top-0 z-50 w-full bg-white shadow-md">
 
-      {/* NAV */}
       <nav className="flex items-center justify-between px-4 py-3">
 
-        {/* LEFT */}
+
         <div className="flex items-center gap-4">
           <GiHamburgerMenu
             size={26}
@@ -29,20 +28,20 @@ const Nav = () => {
             onClick={() => setopen(true)}
           />
           <img
-            src="/logo.svg" // ✅ FIXED
+          className="mix-blend-difference"
+            src="/logo.svg"
             className="w-28 cursor-pointer"
             onClick={() => navigate("/home")}
           />
         </div>
 
-        {/* CENTER */}
+
         <ul className="hidden md:flex gap-8">
           <li onClick={() => navigate("/home")} className="cursor-pointer">Home</li>
           <li onClick={() => navigate("/products")} className="cursor-pointer">Products</li>
           <li onClick={() => navigate("/cart")} className="cursor-pointer">Cart</li>
         </ul>
 
-        {/* RIGHT */}
         <div className="flex items-center gap-4">
           <CiSearch onClick={() => setsearch(!search)} className="cursor-pointer" />
           <IoBagOutline onClick={() => setRightopen(true)} className="cursor-pointer" />
