@@ -28,9 +28,9 @@ const Nav = () => {
             onClick={() => setopen(true)}
           />
           <img
-          className="mix-blend-difference"
+      
             src="/logo.svg"
-            className="w-28 cursor-pointer"
+            className="w-28 cursor-pointer mix-blend-difference"
             onClick={() => navigate("/home")}
           />
         </div>
