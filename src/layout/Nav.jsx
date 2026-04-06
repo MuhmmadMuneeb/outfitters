@@ -28,16 +28,16 @@ const Nav = () => {
             onClick={() => setopen(true)}
           />
           <img
-      
-            src="/logo.svg"
+
             className="w-28 cursor-pointer mix-blend-difference"
+            src="/logo.svg"
             onClick={() => navigate("/home")}
           />
         </div>
 
 
         <ul className="hidden md:flex gap-8">
-          <li onClick={() => navigate("/home")} className="cursor-pointer">Home</li>
+          <li onClick={() => navigate("/")} className="cursor-pointer">Home</li>
           <li onClick={() => navigate("/products")} className="cursor-pointer">Products</li>
           <li onClick={() => navigate("/cart")} className="cursor-pointer">Cart</li>
         </ul>
@@ -56,7 +56,7 @@ const Nav = () => {
       {/* LEFT MENU */}
       <div className={`fixed top-0 left-0 h-screen bg-white w-full sm:w-72 
         ${open ? "translate-x-0" : "-translate-x-full"} transition`}>
-        
+
         <div className="flex justify-between p-4">
           <img src="/logo.svg" className="w-24" />
           <RxCross1 onClick={() => setopen(false)} />
